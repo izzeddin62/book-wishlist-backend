@@ -8,6 +8,7 @@ the frontend of this project can be found [here](https://github.com/izzeddin62/b
 ## Project Setup
 1. Clone the repository: `git clone https://github.com/izzeddin62/book-wishlist-backend.git`
 2. Navigate into the project directory: `cd book-wishlist-backend`
+3. Create a new .env file and copy the contents of .env.example into it.
 3. Install the dependencies: `npm install`
 
 ## Database Setup
@@ -16,13 +17,6 @@ the frontend of this project can be found [here](https://github.com/izzeddin62/b
 3. Update .env with the new database configurations.
 4. Generate migration: `npm run db:generate`
 5. Run migration: `npm run db:migrate`
-
-## Project Setup
-
-1. Clone the repository: `git clone https://github.com/izzeddin62/book-wishlist-backend.git`
-2. Navigate into the project directory: `cd book-wishlist-backend`
-3. Create a new .env file and copy the contents of .env.example into it.
-4. Install the dependencies: `npm install`
 
 ## Database Setup
 
@@ -51,12 +45,12 @@ Login to the application. The body of the request should include the following d
 
 it returns a token that you can use to authenticate future requests.
 
-### GET /books
+### GET /api/books
 
 Returns a list of all books. This is a protected route, so you need to include the token in the request headers.
 
 
-### POST /books
+### POST /api/books
 
 Creates a new book. The body of the request should include the book details. This is a protected route, so you need to include the token in the request headers.
 
@@ -69,7 +63,7 @@ You will need to include the following details in the body of the request:
 
 
 
-### PATCH /books/:id
+### PATCH /api/books/:id
 
 Updates the book with the given ID. The body of the request should include the updated book details. This is a protected route, so you need to include the token in the request headers.
 
@@ -80,9 +74,20 @@ You will need to include the following details in the body of the request:
 - description(optional)
 - imageUrl(optional)
 
-### DELETE /books/:id
+### DELETE /api/books/:id
 
 Deletes the book with the given ID. This is a protected route, so you need to include the token in the request headers.
+
+# project structure
+The project entry point is `src/index.ts`. The project is structured as follows:
+
+- `src/controllers`: This directory contains the controller functions for the application.
+- `src/database`: This directory contains the database configuration and migrations.
+- `src/middleware`: This directory contains the middleware functions for the application. ex: authentication middleware
+- `src/routes`: This directory contains the route definitions for the application.
+- `src/services`: This directory contains the service functions for the application.
+    - `src/services/auth`: This directory contains the authentication service functions.
+    - `src/services/books`: This directory contains the book service functions.
 
 ## Running the Project
 
