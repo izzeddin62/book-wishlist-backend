@@ -18,14 +18,6 @@ the frontend of this project can be found [here](https://github.com/izzeddin62/b
 4. Generate migration: `npm run db:generate`
 5. Run migration: `npm run db:migrate`
 
-## Database Setup
-
-1. Install PostgreSQL.
-2. Create a new database: `createdb <database-name>`
-3. Update .env in with the new database configurations.
-4. generate migration: `npm run db:generate`
-5. run migration: `npm run db:migrate`
-
 ## Endpoints
 For more information on the endpoints, please refer to the [API documentation](https://documenter.getpostman.com/view/8238232/2sA3XSCMFu)
 
