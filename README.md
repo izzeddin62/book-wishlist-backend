@@ -1,1 +1,99 @@
-# book-wishlist-backend
+# Book wishlist backend
+
+## Project description
+This project is a backend application for managing a book wishlist. It is built using TypeScript, Express.js, PostgreSQL, and Drizzle ORM. The application allows users to create an account, login, view a list of books, add new books, update existing books, and delete books. Authentication is implemented using tokens, which need to be included in the request headers for protected routes.
+
+the frontend of this project can be found [here](https://github.com/izzeddin62/book-wishlist)
+
+## Project Setup
+1. Clone the repository: `git clone https://github.com/izzeddin62/book-wishlist-backend.git`
+2. Navigate into the project directory: `cd book-wishlist-backend`
+3. Install the dependencies: `npm install`
+
+## Database Setup
+1. Install PostgreSQL.
+2. Create a new database: `createdb <database-name>`
+3. Update .env with the new database configurations.
+4. Generate migration: `npm run db:generate`
+5. Run migration: `npm run db:migrate`
+
+## Endpoints
+For more information on the endpoints, please refer to the [API documentation](https://documenter.getpostman.com/view/8238232/2sA3XSCMFu)
+- POST /api/auth/signup: Create a new user account. The body of the request should include the following details: firstName, lastName, email, password. It returns a token that can be used to authenticate future requests.
+- POST /api/auth/login: Login to the application. The body of the request should include the following details: email, password. It returns a token that can be used to authenticate future requests.
+- GET /books: Returns a list of all books. This is a protected route, so the token needs to be included in the request headers.
+- POST /books: Creates a new book. The body of the request should include the book details: title, author, genre, description, imageUrl (optional). This is a protected route, so the token needs to be included in the request headers.
+- PATCH /books/:id: Updates the book with the given ID. The body of the request should include the updated book details: title (optional), author (optional), genre (optional), description (optional), imageUrl (optional). This is a protected route, so the token needs to be included in the request headers.
+- DELETE /books/:id: Deletes the book with the given ID. This is a protected route, so the token needs to be included in the request headers.
+
+
+## Project Setup
+
+1. Clone the repository: `git clone https://github.com/izzeddin62/book-wishlist-backend.git`
+2. Navigate into the project directory: `cd book-wishlist-backend`
+3. Create a new .env file and copy the contents of .env.example into it.
+4. Install the dependencies: `npm install`
+
+## Database Setup
+
+1. Install PostgreSQL.
+2. Create a new database: `createdb <database-name>`
+3. Update .env in with the new database configurations.
+4. generate migration: `npm run db:generate`
+5. run migration: `npm run db:migrate`
+
+## Endpoints
+
+## Post /api/auth/signup
+Create a new user account. The body of the request should following details:
+- firstName
+- lastName
+- email
+- password
+
+it returns a token that you can use to authenticate future requests.
+
+## Post /api/auth/login
+Login to the application. The body of the request should include the following details:
+- email
+- password
+
+it returns a token that you can use to authenticate future requests.
+
+### GET /books
+
+Returns a list of all books. This is a protected route, so you need to include the token in the request headers.
+
+
+### POST /books
+
+Creates a new book. The body of the request should include the book details. This is a protected route, so you need to include the token in the request headers.
+
+You will need to include the following details in the body of the request:
+- title
+- author
+- genre
+- description
+- imageUrl(optional)
+
+
+
+### PATCH /books/:id
+
+Updates the book with the given ID. The body of the request should include the updated book details. This is a protected route, so you need to include the token in the request headers.
+
+You will need to include the following details in the body of the request:
+- title(optional)
+- author(optional)
+- genre(optional)
+- description(optional)
+- imageUrl(optional)
+
+### DELETE /books/:id
+
+Deletes the book with the given ID. This is a protected route, so you need to include the token in the request headers.
+
+## Running the Project
+
+1. Start the server: `npm run dev`
+2. The server will be running at `http://localhost:3000` (or whatever port you have configured).
