@@ -7,7 +7,7 @@ export class BookService {
         this.bookRepository = bookRepository;
     }
 
-    create(data: Omit<BookProperties, "id">) {
+    create(data: Omit<BookProperties, "id" | "done">) {
         return this.bookRepository.create(data);
     }
 
@@ -17,6 +17,14 @@ export class BookService {
 
     getAll(ownerId: number) {
         return this.bookRepository.getMyBooks(ownerId);
+    }
+
+    update(bookId: number, ownerId: number, data: Partial<Omit<BookProperties, "id" | "done">>) {
+        return this.bookRepository.update(data, bookId, ownerId);
+    }
+
+    delete(bookId: number, ownerId: number) {
+        return this.bookRepository.delete(bookId, ownerId);
     }
 }
 

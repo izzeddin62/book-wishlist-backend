@@ -8,6 +8,12 @@ interface SignUpRequest extends Request {
   body: Omit<UserProperties, "id">;
 }
 
+interface GetUserRequest extends Request {
+  user: {
+    id: number;
+  };
+}
+
 export class AuthController {
   private authService: AuthService;
 
@@ -28,10 +34,12 @@ export class AuthController {
         .status(201)
         .json({ user: userInfoWithoutPassword, token: userInfo.token });
     } catch (error) {
-        if (error instanceof DuplicateValueError) {
-            res.status(409).json({ error: error.message });
-        }
-        res.status(500).json({ message: "Server error. Please try again later" });
+      if (error instanceof DuplicateValueError) {
+        return res.status(409).json({ error: error.message });
+      }
+      return res
+        .status(500)
+        .json({ message: "Server error. Please try again later" });
     }
   }
 
@@ -45,9 +53,23 @@ export class AuthController {
       res.json({ user: userInfoWithoutPassword, token: userInfo.token });
     } catch (error) {
       if (error instanceof AuthenticationError) {
-        return res.status(401).json({ error: 'Invalid email or password' });
+        return res.status(401).json({ error: "Invalid email or password" });
       }
-      res.status(500).json({ error: 'Server error' });
+      return res.status(500).json({ error: "Server error" });
+    }
+  }
+
+  async getUser(req: GetUserRequest, res: Response) {
+    try {
+      const userId = req.user.id;
+      const user = await this.authService.getUser(userId);
+      if (!user) {
+        return res.status(404).json({ error: "User not found" });
+      }
+      const { password, ...userInfoWithoutPassword } = user;
+      return res.json({ user: userInfoWithoutPassword });
+    } catch (error) {
+      return res.status(500).json({ error: "Server error" });
     }
   }
 }

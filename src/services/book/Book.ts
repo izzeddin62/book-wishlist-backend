@@ -5,7 +5,8 @@ export type BookProperties = {
   owner: number,
   description: string,
   genres: string[],
-  imageUrl: string | null
+  imageUrl: string | null,
+  done: boolean
 };
 
 export class Book {
@@ -16,6 +17,7 @@ export class Book {
   description: string;
   genres: string[];
   imageUrl: string | null;
+  done: boolean;
   constructor(data: BookProperties) {
     this.id = data.id;
     this.title = data.title;
@@ -24,6 +26,7 @@ export class Book {
     this.description = data.description;
     this.genres = data.genres;
     this.imageUrl = data.imageUrl;
+    this.done = data.done;
   }
 
   getBookProperties(): BookProperties {
@@ -34,7 +37,8 @@ export class Book {
       owner: this.owner,
       description: this.description,
       genres: this.genres,
-      imageUrl: this.imageUrl
+      imageUrl: this.imageUrl,
+      done: this.done
     };
   }
 }

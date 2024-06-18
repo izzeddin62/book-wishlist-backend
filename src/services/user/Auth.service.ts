@@ -42,6 +42,10 @@ export class AuthService {
     return { user, token: token };
   
   }
+
+  public async getUser(id: number): Promise<User | null> {
+    return this.authPersistance.getUserById(id);
+  }
 }
 
 export const authService = new AuthService(authPersistance);

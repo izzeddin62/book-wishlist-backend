@@ -64,6 +64,23 @@ export class AuthPersistance {
     }
     return null;
   }
+
+  public async getUserById(id: number): Promise<User | null> {
+    const [user] = await db
+      .select()
+      .from(UserTable)
+      .where(eq(UserTable.id, id));
+    if (user) {
+      return rowToDomain({
+        id: user.id,
+        email: user.email,
+        password: user.password,
+        firstName: user.first_name,
+        lastName: user.last_name,
+      });
+    }
+    return null;
+  }
 }
 
 export const authPersistance = new AuthPersistance();

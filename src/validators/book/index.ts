@@ -10,6 +10,21 @@ export const createBookValidator = celebrate({
   })
 });
 
+
+export const updateBookValidator = celebrate({
+  [Segments.BODY]: Joi.object().keys({
+    title: Joi.string().optional().trim(),
+    description: Joi.string().optional().trim(),
+    author: Joi.string().optional().trim(),
+    genres: Joi.array().items(Joi.string()).optional(),
+    imageUrl: Joi.string().optional().allow(null),
+    done: Joi.boolean().optional(),
+  }),
+  [Segments.PARAMS]: Joi.object().keys({
+    id: Joi.number().required(),
+  }),
+});
+
 export const getBookValidator = celebrate({
   [Segments.PARAMS]: Joi.object().keys({
     id: Joi.number().required(),

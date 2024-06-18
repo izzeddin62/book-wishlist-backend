@@ -15,6 +15,13 @@
       "when": 1718536258772,
       "tag": "0001_neat_stature",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1718652199813,
+      "tag": "0002_faulty_zombie",
+      "breakpoints": true
     }
   ]
 }

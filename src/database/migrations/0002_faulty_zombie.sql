@@ -1,0 +1,1 @@
+ALTER TABLE "book" ADD COLUMN "done" boolean DEFAULT false NOT NULL;

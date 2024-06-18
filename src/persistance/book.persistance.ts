@@ -12,7 +12,8 @@ type Row = {
   author: string;
   owner: number;
   genres: string[];
-    imageUrl: string | null;
+  imageUrl: string | null;
+  done: boolean;
 };
 
 function rowToDomain(row: Row): Book {
@@ -24,11 +25,12 @@ function rowToDomain(row: Row): Book {
     owner: row.owner,
     genres: row.genres,
     imageUrl: row.imageUrl,
+    done: row.done,
   });
 }
 
 export class BookPersistance {
-  async create(data: Omit<BookProperties, "id">) {
+  async create(data: Omit<BookProperties, "id" | "done">) {
     try {
       const { title, genres, owner, description, author, imageUrl } = data;
       const [book] = await db
@@ -49,6 +51,7 @@ export class BookPersistance {
           genres: BookTable.genres,
           author: BookTable.author,
           imageUrl: BookTable.imageUrl,
+          done: BookTable.done,
         });
       return rowToDomain(book);
     } catch (error) {
@@ -76,6 +79,43 @@ export class BookPersistance {
       .from(BookTable)
       .where(eq(BookTable.owner, ownerId));
     return houses.map(rowToDomain);
+  }
+
+  async update(
+    data: Partial<Omit<BookProperties, "id" | "owner">>,
+    id: number,
+    ownerId: number
+  ) {
+    const [book] = await db
+      .update(BookTable)
+      .set(data)
+      .where(and(eq(BookTable.id, id), eq(BookTable.owner, ownerId)))
+      .returning({
+        id: BookTable.id,
+        title: BookTable.title,
+        owner: BookTable.owner,
+        description: BookTable.description,
+        genres: BookTable.genres,
+        imageUrl: BookTable.imageUrl,
+        author: BookTable.author,
+        done: BookTable.done,
+      });
+    if (!book) {
+      return null;
+    }
+    return rowToDomain(book);
+  }
+
+  async delete(id: number, ownerId: number) {
+    const [book] = await db
+      .delete(BookTable)
+      .where(and(eq(BookTable.id, id), eq(BookTable.owner, ownerId)))
+      .returning();
+    
+    if (!book) {
+      return null;
+    }
+    return rowToDomain(book);
   }
 }
 

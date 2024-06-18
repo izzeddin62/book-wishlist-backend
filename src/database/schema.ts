@@ -6,6 +6,7 @@ import {
   varchar,
   unique,
   text,
+  boolean,
 } from "drizzle-orm/pg-core";
 
 export const UserTable = pgTable("user", {
@@ -29,4 +30,5 @@ export const BookTable = pgTable("book", {
     .notNull()
     .default(sql`ARRAY[]::text[]`),
   imageUrl: varchar("image_url"),
+  done: boolean("done").notNull().default(false),
 });
