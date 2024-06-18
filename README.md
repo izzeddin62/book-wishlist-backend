@@ -17,16 +17,6 @@ the frontend of this project can be found [here](https://github.com/izzeddin62/b
 4. Generate migration: `npm run db:generate`
 5. Run migration: `npm run db:migrate`
 
-## Endpoints
-For more information on the endpoints, please refer to the [API documentation](https://documenter.getpostman.com/view/8238232/2sA3XSCMFu)
-- POST /api/auth/signup: Create a new user account. The body of the request should include the following details: firstName, lastName, email, password. It returns a token that can be used to authenticate future requests.
-- POST /api/auth/login: Login to the application. The body of the request should include the following details: email, password. It returns a token that can be used to authenticate future requests.
-- GET /books: Returns a list of all books. This is a protected route, so the token needs to be included in the request headers.
-- POST /books: Creates a new book. The body of the request should include the book details: title, author, genre, description, imageUrl (optional). This is a protected route, so the token needs to be included in the request headers.
-- PATCH /books/:id: Updates the book with the given ID. The body of the request should include the updated book details: title (optional), author (optional), genre (optional), description (optional), imageUrl (optional). This is a protected route, so the token needs to be included in the request headers.
-- DELETE /books/:id: Deletes the book with the given ID. This is a protected route, so the token needs to be included in the request headers.
-
-
 ## Project Setup
 
 1. Clone the repository: `git clone https://github.com/izzeddin62/book-wishlist-backend.git`
@@ -43,6 +33,7 @@ For more information on the endpoints, please refer to the [API documentation](h
 5. run migration: `npm run db:migrate`
 
 ## Endpoints
+For more information on the endpoints, please refer to the [API documentation](https://documenter.getpostman.com/view/8238232/2sA3XSCMFu)
 
 ## Post /api/auth/signup
 Create a new user account. The body of the request should following details:
